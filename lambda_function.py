@@ -2,6 +2,7 @@
 
 import boto3
 import logging
+from botocore.exceptions import ClientError
 
 # Connect to AWS client endpoint
 client = boto3.client('ec2')
@@ -23,7 +24,8 @@ def lambda_handler(event, context):
         try:
             response = client.release_address(AllocationId=id)
             print(f"Address: {id} released.")
-        except 
+        except ClientError as e:
+            print(e)
 
 
 lambda_handler(None, None)
