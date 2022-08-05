@@ -12,6 +12,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
+    logger.info("Function {} has started execution.")
     # Get Addresses
     ids = []
     response = client.describe_addresses()
@@ -23,9 +24,13 @@ def lambda_handler(event, context):
     for id in ids:
         try:
             response = client.release_address(AllocationId=id)
-            print(f"Address: {id} released.")
+            logger.info(f"Function {context.function_name}: EIP Address: {id} released.")
         except ClientError as e:
             print(e)
 
+    if not ids:
+        logger.info(f"Function {context.function_name}: No unassociated elastic IP address found.")
 
-lambda_handler(None, None)
+    logger.info("Function {} has finished execution".format(context.function_name)
+
+
