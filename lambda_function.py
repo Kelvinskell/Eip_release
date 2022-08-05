@@ -31,6 +31,6 @@ def lambda_handler(event, context):
     if not ids:
         logger.info(f"Function {context.function_name}: No unassociated elastic IP address found.")
 
-    logger.info("Function {} has finished execution".format(context.function_name)
+    logger.info("Function {} has finished execution".format(context.function_name))
 
 
